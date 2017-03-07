@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<meta name="description" content="Multiplayer Rock, Paper, Scissors">
+
+	<link href='https://fonts.googleapis.com/css?family=Inconsolata' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" type="text/css" href="http://bootswatch.com/paper/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="assets/css/custom-reset.css">
+	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+
+	<title>RPS Multiplayer</title>
+</head>
+<body>
+	<nav class="navbar navbar-default navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#">RPS Multiplayer</a>
+			</div>
+
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav navbar-right">
+					<li><button id="contactButton" class="btn btn-info btn-md" data-toggle="modal" data-target="#contactModal" type="button" >Contact Developer</button></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<div class="modal fade" id="contactModal" role="dialog">
+	    <div class="modal-dialog">	    
+	      <!-- Modal content-->
+	      <div class="modal-content">
+	        <div class="modal-header">
+	          <button type="button" class="close" data-dismiss="modal">&times;</button>
+	          <h4 class="modal-title">What do you need help with?</h4>
+	        </div>
+	        <div class="modal-body">
+		        <h4 class="modal-section" data-toggle="collapse" data-target="#troubleshooting">Game Issues and Requests</h4>
+
+			    	<div id="troubleshooting" class="collapse">
+						<form role="form" class="go-right">
+							<div class="form-group">
+								<div class="help-block with-errors"></div>
+								<input id="issues_name" name="name" type="text" class="form-control" required>
+								<label for="issues_name">Your Name</label>
+							</div>
+							<div class="form-group">
+								<div class="help-block with-errors"></div>
+								<input id="issues_email" name="email" type="tel" class="form-control" required>
+								<label for="issues_email">Your Email</label>
+							</div>
+							<div class="form-group">
+								<div class="help-block with-errors"></div>
+								<textarea id="issues_message" name="phone" class="form-control" required></textarea>
+								<label for="issues_message">Issues? Requests?</label>
+							</div>
+								<input type="submit" class="btn btn-success btn-send" value="Send Message">
+						</form>
+					</div>
+				<hr class="contact-sections">
+				<h4 class="modal-section" data-toggle="collapse" data-target="#contact">Just want to say hello?</h4>
+					<div id="contact" class="collapse">
+						<form role="form" class="go-right">
+							<div class="form-group">
+								<div class="help-block with-errors"></div>
+								<input id="hello_name" name="name" type="text" class="form-control" required>
+								<label for="hello_name">Your Name</label>
+							</div>
+							<div class="form-group">
+								<div class="help-block with-errors"></div>
+								<input id="hello_email" name="email" type="tel" class="form-control" required>
+								<label for="hello_email">Your Email</label>
+							</div>
+							<div class="form-group">
+								<div class="help-block with-errors"></div>
+								<textarea id="hello_message" name="phone" class="form-control" required></textarea>
+								<label for="hello_message">Your Message</label>
+							</div>
+								<input type="submit" class="btn btn-success btn-send" value="Send Message">
+						</form>
+					</div>
+				<hr class="contact-sections">
+				<h4 class="modal-section" data-toggle="collapse" data-target="#hire">Hire</h4>
+					<div id="hire" class="collapse">
+						<form role="form" class="go-right">
+							<div class="form-group">
+								<div class="help-block with-errors"></div>
+								<input id="hire_name" name="name" type="text" class="form-control" required>
+								<label for="hire_name">Your Name</label>
+							</div>
+							<div class="form-group">
+								<div class="help-block with-errors"></div>
+								<input id="hire_email" name="email" type="tel" class="form-control" required>
+								<label for="hire_email">Your Email</label>
+							</div>
+							<div class="form-group">
+								<div class="help-block with-errors"></div>
+								<textarea id="hire_message" name="phone" class="form-control" required></textarea>
+								<label for="hire_message">Tell Me About Your Project</label>
+							</div>
+								<input type="submit" class="btn btn-success btn-send" value="Send Message">
+						</form>
+					</div>
+	        </div>
+	        <div class="modal-footer">
+<!-- 	          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
+	        </div>
+	      </div>
+	      
+	    </div>
+	</div>
+
+	<div class="container main">
+
+		<div class="row fade-in">
+			<section class="col-md-12">
+
+				<!-- Main game area -->
+				<div class="well well-main">
+
+					<!-- Name button / text -->
+					<div class="row">
+						<br/><br/>
+						<section id="name_button" class="col-md-offset-4 col-md-4 text-center">
+							<div class="form-group">
+								<div class="input-group">
+									<input class="form-control" id="name" type="text" placeholder="Player Name">
+									<span class="input-group-btn"><button id="submit" class="btn btn-primary">Join</button></span>
+								</div>
+							</div>
+						</section>
+					</div>
+					<div class="row">
+						<section id="game_status" class="col-md-offset-4 col-md-4 text-center"></section>
+					</div><br/>
+
+					<!-- RPS buttons -->
+					<div class="row">
+						<section class="col-md-4 outline text-center">
+							<div>
+								<h3 id="name_p1" class="space-after-lg">Waiting for Player 1</h3>
+								<button id="rock_p1" class="btn btn-primary space-after rps-p1 hide" data-choice="rock">Rock</button><br/>
+								<button id="paper_p1" class="btn btn-primary space-after rps-p1 hide" data-choice="paper">Paper</button><br/>
+								<button id="scissors_p1" class="btn btn-primary space-after rps-p1 hide" data-choice="scissors">Scissors</button><br/>
+								<p id="count_p1" class="hide">Wins: 0 Losses: 0</p>
+							</div>
+						</section>
+						<section class="col-md-4 outline flex">
+							<div id="winner"></div>
+						</section>
+						<section class="col-md-4 outline text-center">
+							<div>
+								<h3 id="name_p2" class="space-after-lg">Waiting for Player 2</h3>
+								<button id="rock_p2" class="btn btn-primary space-after rps-p2 hide" data-choice="rock">Rock</button><br/>
+								<button id="paper_p2" class="btn btn-primary space-after rps-p2 hide" data-choice="paper">Paper</button><br/>
+								<button id="scissors_p2" class="btn btn-primary space-after rps-p2 hide" data-choice="scissors">Scissors</button><br/>
+								<p id="count_p2" class="hide">Wins: 0 Losses: 0</p>
+							</div>
+						</section>
+					</div><br/><br/>
+
+					<!-- Chat window -->
+					<div class="row">
+						<section class="col-md-offset-2 col-md-8">
+							<label id="chatDirections">Tip: Please, feel free to talk some trash...</label>
+							<div id="chat" class="chat"></div>
+							<div class="form-group">
+								<div class="input-group">
+									<input class="form-control" id="chat_input" type="text" placeholder="For instance: You're so predictable, noob!">
+									<span class="input-group-btn"><button id="chat_send" class="btn btn-primary">Send</button></span>
+								</div>
+							</div>
+						</section>
+					</div>
+				</div>
+			</section>
+		</div>
+
+	</div>
+
+	<footer class="footer">
+		<div class="containter">
+			<p class="text-center text-muted">&copy; Copyright 2016 Michael Wolf</p>
+		</div>
+	</footer>
+
+	<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+	<script src="https://bootswatch.com/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script src="https://bootswatch.com/assets/js/custom.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/3.3.0/firebase.js"></script>
+	<script src="assets/javascript/app.js"></script>
+</body>
+</html>
