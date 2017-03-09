@@ -8,6 +8,7 @@
 	<meta name="description" content="Multiplayer Rock, Paper, Scissors">
 
 	<link href='https://fonts.googleapis.com/css?family=Inconsolata' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="assets/css/font-awesome/css/font-awesome.min.css">
 	<link rel="stylesheet" type="text/css" href="http://bootswatch.com/paper/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="assets/css/custom-reset.css">
 	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
@@ -29,7 +30,7 @@
 
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav navbar-right">
-					<li><button id="contactButton" class="btn btn-info btn-md" data-toggle="modal" data-target="#contactModal" type="button" >Contact Developer</button></li>
+					<li><button id="contactButton" class="btn btn-info btn-md" data-toggle="modal" data-target="#contactModal" type="button">Game Info</button></li>
 				</ul>
 			</div>
 		</div>
@@ -44,76 +45,30 @@
 	          <h4 class="modal-title">What do you need help with?</h4>
 	        </div>
 	        <div class="modal-body">
-		        <h4 class="modal-section" data-toggle="collapse" data-target="#troubleshooting">Game Issues and Requests</h4>
+		        <h4 class="modal-section" data-toggle="collapse" data-target="#troubleshooting">How To Play</h4>
 
 			    	<div id="troubleshooting" class="collapse">
-						<form role="form" class="go-right">
-							<div class="form-group">
-								<div class="help-block with-errors"></div>
-								<input id="issues_name" name="name" type="text" class="form-control" required>
-								<label for="issues_name">Your Name</label>
-							</div>
-							<div class="form-group">
-								<div class="help-block with-errors"></div>
-								<input id="issues_email" name="email" type="tel" class="form-control" required>
-								<label for="issues_email">Your Email</label>
-							</div>
-							<div class="form-group">
-								<div class="help-block with-errors"></div>
-								<textarea id="issues_message" name="phone" class="form-control" required></textarea>
-								<label for="issues_message">Issues? Requests?</label>
-							</div>
-								<input type="submit" class="btn btn-success btn-send" value="Send Message">
-						</form>
+				    	<ol>
+							<li>Join the game by entering your name/alias into the input</li>
+							<li>Wait for another player to join. If a player is already in the game, game on!</li>
+							<li>Wait till it's your turn and choose Rock, Paper or Scissors by clicking on the buttons (each labeled their appropriately: "Rock", "Paper", "Scissors".</li>
+							<li>Have fun &amp; Good luck!</li>
+						</ol>
 					</div>
-				<hr class="contact-sections">
-				<h4 class="modal-section" data-toggle="collapse" data-target="#contact">Just want to say hello?</h4>
+				<h4 class="modal-section" data-toggle="collapse" data-target="#contact">Tips</h4>
 					<div id="contact" class="collapse">
-						<form role="form" class="go-right">
-							<div class="form-group">
-								<div class="help-block with-errors"></div>
-								<input id="hello_name" name="name" type="text" class="form-control" required>
-								<label for="hello_name">Your Name</label>
-							</div>
-							<div class="form-group">
-								<div class="help-block with-errors"></div>
-								<input id="hello_email" name="email" type="tel" class="form-control" required>
-								<label for="hello_email">Your Email</label>
-							</div>
-							<div class="form-group">
-								<div class="help-block with-errors"></div>
-								<textarea id="hello_message" name="phone" class="form-control" required></textarea>
-								<label for="hello_message">Your Message</label>
-							</div>
-								<input type="submit" class="btn btn-success btn-send" value="Send Message">
-						</form>
+						<ul>
+							<li>Try to recognize a pattern in your opponents choices.</li>
+							<li>But don't overthink this. This is a very simple game!</li>
+							<li>Friendly trash talk is encouraged! Use the chatbox.</li>
+						</ul>
 					</div>
-				<hr class="contact-sections">
-				<h4 class="modal-section" data-toggle="collapse" data-target="#hire">Hire</h4>
+				<h4 class="modal-section" data-toggle="collapse" data-target="#hire">Developer Contact</h4>
 					<div id="hire" class="collapse">
-						<form role="form" class="go-right">
-							<div class="form-group">
-								<div class="help-block with-errors"></div>
-								<input id="hire_name" name="name" type="text" class="form-control" required>
-								<label for="hire_name">Your Name</label>
-							</div>
-							<div class="form-group">
-								<div class="help-block with-errors"></div>
-								<input id="hire_email" name="email" type="tel" class="form-control" required>
-								<label for="hire_email">Your Email</label>
-							</div>
-							<div class="form-group">
-								<div class="help-block with-errors"></div>
-								<textarea id="hire_message" name="phone" class="form-control" required></textarea>
-								<label for="hire_message">Tell Me About Your Project</label>
-							</div>
-								<input type="submit" class="btn btn-success btn-send" value="Send Message">
-						</form>
+						<h5 id="email" class="modal-text-margin"></h5>
 					</div>
 	        </div>
-	        <div class="modal-footer">
-<!-- 	          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
-	        </div>
+	        <div class="modal-footer"></div>
 	      </div>
 	      
 	    </div>
@@ -171,7 +126,7 @@
 					<!-- Chat window -->
 					<div class="row">
 						<section class="col-md-offset-2 col-md-8">
-							<label id="chatDirections">Tip: Please, feel free to talk some trash...</label>
+							<label id="chatDirections">Use this chat box for some friendly trash-talk...</label>
 							<div id="chat" class="chat"></div>
 							<div class="form-group">
 								<div class="input-group">
@@ -189,7 +144,7 @@
 
 	<footer class="footer">
 		<div class="containter">
-			<p class="text-center text-muted">&copy; Copyright 2016 Michael Wolf</p>
+			<p class="text-center text-muted">Built with <i class="fa fa-heart"></i> by Michael Wolf</p>
 		</div>
 	</footer>
 

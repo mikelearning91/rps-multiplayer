@@ -9,26 +9,26 @@ var config = {
 
 firebase.initializeApp(config);
 
-// Executes on every update to players data
+// Updatea players data everytime new data is received in Firebase
 firebase.database().ref("players").on("value", function(snapshot) {
     let p1active = snapshot.child("1/name").exists();
     let p2active = snapshot.child("2/name").exists();
 
-    // If Player 1 is present, update & show text
+    // If Player 1 is in-game, show text
     if (p1active) {
         game.player1Name = snapshot.child("1/name").val();
         $("#name_p1").hide().html(snapshot.child("1/name").val()).fadeIn();
         $("#count_p1").hide().html("Wins: " + snapshot.child("1/wins").val() + " Losses: " + snapshot.child("1/losses").val()).fadeIn().removeClass("hide");
     }
 
-    // If Player 2 is present, update & show text
+    // If Player 2 is in-game, show text
     if (p2active) {
         game.player2Name = snapshot.child("2/name").val();
         $("#name_p2").hide().html(snapshot.child("2/name").val()).fadeIn();
         $("#count_p2").hide().html("Wins: " + snapshot.child("2/wins").val() + " Losses: " + snapshot.child("2/losses").val()).fadeIn().removeClass("hide");
     }
 
-    // If both players present and game has not already been started, start game
+    // If both players present, start game (if it hasn't started already)
     if (p1active && p2active && !game.playersReady) {
         game.playersReady = true;
         game.playerTurn(1);
@@ -38,12 +38,12 @@ firebase.database().ref("players").on("value", function(snapshot) {
     if (snapshot.child("1/choice").exists()) { game.playerTurn(2); }
     if (snapshot.child("winner").exists()) { game.showWinner(); }
 
-    // If neither player is connected (new game), clear chat
+    // If neither player is connected: new game, clear chat
     if (!p1active && !p2active) {
         firebase.database().ref("chat").remove();
     }
 
-    // Log errors to console
+    // console.log errors
 }, function (errorObject) {
     console.log("The read failed: " + errorObject.code);
 });
@@ -68,14 +68,14 @@ firebase.database().ref("players").on("child_removed", function(snapshot) {
         // Delete chat log (new player incoming)
         firebase.database().ref("chat").remove();
 
-        // Show disconnect message
+        // Show player disconnected message in chatbox
         $("#chat").append("<span>Player " + otherPlayer + " has disconnected.</span><br/>");
 
-        // Reset game state (not ready to play)
+        // Reset game state - not enough players
         game.playersReady = false;
     }
 
-    // Logs errors to console
+    // console.log errors
 }, function (errorObject) {
     console.log("The read failed: " + errorObject.code);
 });
@@ -83,7 +83,7 @@ firebase.database().ref("players").on("child_removed", function(snapshot) {
 
 // If chats are added
 firebase.database().ref("chat").on("child_added", function(snapshot) {
-    // Places text with color based on whether it came from this player or the other player
+    // color code each player's text
     // "Const" insures that the following constant will not be redefined - "scoped-blocked"
     const textColor = game.player == snapshot.val().player ? "blue" : "purple";
     $("#chat").append("<span style='color: " + textColor + "'>" + snapshot.val().text + "</span><br/>");
@@ -102,15 +102,14 @@ $("#chat_send").on("click", function(){
     $("#chatDirections").fadeOut('fast');
 });
 
-// Game object
+// Game (object)
 let game = {
     // Properties
-    player: undefined,  // Number of this player
+    player: undefined,  // Player number (1 or 2)
     player1Name: undefined,
     player2Name: undefined,
-    playersReady: false,  // Guard for starting game
-    
-    // Methods
+    playersReady: false,  // If both players are present (playersReady: true), start game
+
     // Sets up text and buttons for current player's turn
     playerTurn : function(player){
         if (game.player == player) {
@@ -256,51 +255,8 @@ $(window).on("beforeunload", function(event){
     firebase.database().ref("players/" + game.player).remove();
 });
 
-// Contact Form/recaptcha setup
-function showRecaptcha(element) {
-  Recaptcha.create('6LeU-BcUAAAAANubUG7PzuuSKVsVOw2eGnUiw_7w', element, {
-    theme: 'custom', // you can pick another at https://developers.google.com/recaptcha/docs/customization
-    custom_theme_widget: 'recaptcha_widget'
-  });
-}
-
-function setupRecaptcha() {
-  var contactFormHost = 'https://rps-contact-form.herokuapp.com/',
-      form = $('#contact-form'),
-      notice = form.find('#notice');
-
-  if (form.length) {
-    showRecaptcha('recaptcha_widget');
-
-    form.submit(function(ev){
-      ev.preventDefault();
-
-      $.ajax({
-        type: 'POST',
-        url: contactFormHost + 'send_email',
-        data: form.serialize(),
-        dataType: 'json',
-        success: function(response) {
-          switch (response.message) {
-            case 'success':
-              form.fadeOut(function() {
-                form.html('<h4>' + form.data('success') + '</h4>').fadeIn();
-              });
-              break;
-
-            case 'failure_captcha':
-              showRecaptcha('recaptcha_widget');
-              notice.text(notice.data('captcha-failed')).fadeIn();
-              break;
-
-            case 'failure_email':
-              notice.text(notice.data('error')).fadeIn();
-          }
-        },
-        error: function(xhr, ajaxOptions, thrownError) {
-          notice.text(notice.data('error')).fadeIn();
-        }
-      });
-    });
-  }
-}
+// Block email from spambots
+var a = 'mikelearning91',
+b = 'gmail.com',
+c = 'Shoot me an <a hre' + 'f="mai' + 'lto:' + a + '@' + b + '">email</a>';
+$('#email').append(c)

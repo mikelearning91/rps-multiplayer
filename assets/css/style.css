@@ -1,17 +1,75 @@
-.btn:hover, .btn:focus, .btn:active {
-   outline: none !important;
+nav li {
+	line-height: 60px;
+}
+
+body {
+	padding-top: 50px;
+}
+
+a {
+	outline: none;
+}
+
+ol li {
+	font-size: 18px !important;
+}
+
+ul li {
+	font-size: 18px !important;
+}
+
+/* input selectors */
+input, textarea {
+	box-sizing: border-box;
+	width: 100%;
+	padding: 3px 9px;
+}
+
+input[type=submit], input[type=button] {
+	background: #2196f3 !important;
+	border: 0;
+	outline: none;
+	width: auto;
+	margin-top: 10px;
+	padding: 10px 20px;
+	font-size: 15px;
+	color: white;
+	transition: all 0.2s linear;
+	text-transform: capitalize;
+}
+
+input[type=submit]:hover, input[type=button]:hover {
+	background: #357EBD !important;
+}
+
+textarea {
+	height: 200px;
 }
 
 .well-main {
 	min-height: 600px;
 }
 
-nav li {
-	line-height: 60px;
+.navbar-brand {
+	font-size: 1.75em !important;
+	font-weight: bold;
 }
 
-.modal-title:after {
-	
+.nav li {
+	font-size: 1.25em !important;
+	font-weight: normal;
+}
+
+.btn:hover, .btn:focus, .btn:active {
+   outline: none !important;
+}
+
+#output {
+	color: #DF691A;
+}
+
+.modal-text-margin {
+	margin-left: 1.5em;
 }
 
 .modal-section {
@@ -21,11 +79,15 @@ nav li {
 	border-bottom: 1px solid #d4d4d4;
 }
 
+.modal-header {
+	border-bottom: 1px solid gray !important;
+}
+
 .modal-section:hover {
 	background: rgba(66, 131, 255, 0.2);
 }
 
-.contact-sections {
+.info-sections {
 	margin: 0 !important;
 }
 
@@ -72,82 +134,92 @@ nav li {
 	margin-bottom: 12px;
 }
 
-/* contact form customizations */
-.form-control{
-    background: transparent;
+/* media queries */
+@media screen and (max-width: 767px) {
+	body {
+		padding: 0;
+	}
+
+	nav {
+		position: static !important;
+	}
+
+	.main {
+		margin-top: -11px;
+		padding: 0px 25px;
+	}
+
+	.portfolio_pic {
+		width: 275px;
+		height: 205px;
+	}
+
+	section {
+	    animation-duration: 0s !important;
+	}
 }
-form {
-	width: 320px;
-	margin: 20px;
+
+/* Animations */
+.move-in-left {
+	animation-name: move_in_left;
+    animation-duration: 0.8s;
+    animation-timing-function: ease-out;
 }
-form > div {
-	position: relative;
-	overflow: hidden;
+
+@keyframes move_in_left {
+	0%   {visibility: hidden; transform: translate3d(-1000px, 0, 0);}
+	19%  {visibility: hidden; transform: translate3d(-1000px, 0, 0);}
+	20%  {visibility: visible; transform: translate3d(-1000px, 0, 0);}
+	100% {transform: translate3d(0, 0, 0);}
 }
-form input, form textarea {
-	width: 100%;
-	border: 2px solid gray;
-	background: none;
-	position: relative;
-	top: 0;
-	left: 0;
-	z-index: 1;
-	padding: 8px 12px;
-	outline: 0;
+
+.fade-in {
+	animation-name: fade_in;
+    animation-duration: 0.8s;
+    animation-timing-function: ease;
 }
-form input:valid, form textarea:valid {
-	background: white;
+
+@keyframes fade_in {
+	0%   {opacity: 0; transform: rotate3d(0, 1, 0, 90deg);}
+	100% {opacity: 1; transform: rotate3d(0, 1, 0, 0deg);}
 }
-form input:focus, form textarea:focus {
-	border-color: #357EBD;
+
+.fade-in-later {
+	animation-name: fade_in_later;
+    animation-duration: 1s;
+    animation-timing-function: ease;
 }
-form input:focus + label, form textarea:focus + label {
-	background: #357EBD;
-	color: white;
-	font-size: 70%;
-	padding: 1px 6px;
-	z-index: 2;
-	text-transform: uppercase;
+
+@keyframes fade_in_later {
+	0%   {opacity: 0;}
+	30%	 {opacity: 0;}
+	80%  {opacity: 1;}
+	100% {opacity: 1;}
 }
-form label {
-	-webkit-transition: background 0.7s, color 0.7s, top 0.7s, bottom 0.7s, right 0.7s, left 0.7s;
-	transition: background 0.7s, color 0.7s, top 0.7s, bottom 0.7s, right 0.7s, left 0.7s;
-	position: absolute;
-	color: #999;
-	padding: 7px 6px;
-	font-weight: normal;
+
+html {
+  position: relative;
+  min-height: 100%;
 }
-form textarea {
-	display: block;
-	resize: vertical;
+
+body {
+  margin-bottom: 61px;
 }
-form.go-bottom input, form.go-bottom textarea {
-	padding: 12px 12px 12px 12px;
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  box-sizing: border-box;
+  width: 100%;
+  height: 61px;
+  margin: 0 auto;
+  padding: 20px 0;
 }
-form.go-bottom label {
-	top: 0;
-	bottom: 0;
-	left: 0;
-	width: 100%;
+
+.footer p {
+	margin: 0;
 }
-form.go-bottom input:focus, form.go-bottom textarea:focus {
-	padding: 4px 6px 20px 6px;
-}
-form.go-bottom input:focus + label, form.go-bottom textarea:focus + label {
-	top: 100%;
-	margin-top: -16px;
-}
-form.go-right label {
-	border-radius: 0 5px 5px 0;
-	height: 100%;
-	top: 0;
-	right: 100%;
-	width: 100%;
-	margin-right: -100%;
-}
-form.go-right input:focus + label, form.go-right textarea:focus + label {
-	right: 0;
-	margin-right: 0;
-	width: 40%;
-	padding-top: 5px;
+
+.navbar-right {
+	margin-right: 0 !important;
 }
